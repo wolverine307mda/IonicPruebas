@@ -1,0 +1,13 @@
+# Ionic/Angular/Node common
+node_modules/
+www/
+android/
+ios/
+build/
+dist/
+.angular/
+.git/
+.DS_Store
+*.log
+*.tmp
+node_modules/
