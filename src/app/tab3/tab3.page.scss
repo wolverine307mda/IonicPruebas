@@ -1,0 +1,72 @@
+.notes-container {
+  padding: 16px;
+}
+
+.note-title-input {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.note-content-input {
+  min-height: 100px;
+}
+
+.note-card {
+  margin: 12px 0;
+  
+  .note-content {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  
+  .edit-mode {
+    margin-bottom: 16px;
+  }
+  
+  .note-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    border-top: 1px solid var(--ion-color-light);
+    padding-top: 12px;
+  }
+}
+
+.no-notes {
+  margin-top: 40px;
+  
+  ion-icon {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    margin: 8px 0;
+    color: var(--ion-color-medium);
+  }
+  
+  .subtitle {
+    font-size: 0.9em;
+    font-style: italic;
+  }
+}
+
+ion-card {
+  margin: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-card-title {
+  color: var(--ion-color-primary);
+  font-size: 1.2em;
+}
+
+ion-card-subtitle {
+  color: var(--ion-color-medium);
+  font-size: 0.85em;
+}
+
+ion-button[expand="block"] {
+  margin-top: 16px;
+}

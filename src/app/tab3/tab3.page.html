@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Notas
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,119 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Mis Notas</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="notes-container">
+    <!-- Formulario para nueva nota -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nueva Nota</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input 
+            [(ngModel)]="newNoteTitle" 
+            placeholder="Título de la nota"
+            class="note-title-input">
+          </ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-textarea 
+            [(ngModel)]="newNoteContent" 
+            placeholder="Escribe tu nota aquí..."
+            rows="4"
+            class="note-content-input">
+          </ion-textarea>
+        </ion-item>
+        
+        <ion-button 
+          expand="block" 
+          (click)="addNote()" 
+          [disabled]="!newNoteTitle || !newNoteContent">
+          <ion-icon name="add" slot="start"></ion-icon>
+          Agregar Nota
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de notas -->
+    <div *ngIf="notes.length === 0" class="no-notes">
+      <ion-card>
+        <ion-card-content class="ion-text-center">
+          <ion-icon name="document-text-outline" size="large" color="medium"></ion-icon>
+          <p>No tienes notas aún</p>
+          <p class="subtitle">Agrega tu primera nota usando el formulario de arriba</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <ion-card *ngFor="let note of notes; let i = index" class="note-card">
+      <ion-card-header>
+        <ion-card-title>{{ note.title }}</ion-card-title>
+        <ion-card-subtitle>{{ getFormattedDate(note.date) }}</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div *ngIf="!note.editing" class="note-content">
+          {{ note.content }}
+        </div>
+        
+        <div *ngIf="note.editing" class="edit-mode">
+          <ion-item>
+            <ion-input 
+              [(ngModel)]="note.title" 
+              placeholder="Título">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-textarea 
+              [(ngModel)]="note.content" 
+              placeholder="Contenido"
+              rows="4">
+            </ion-textarea>
+          </ion-item>
+        </div>
+        
+        <div class="note-actions">
+          <ion-button 
+            *ngIf="!note.editing" 
+            fill="clear" 
+            size="small" 
+            (click)="editNote(i)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          
+          <ion-button 
+            *ngIf="note.editing" 
+            fill="clear" 
+            size="small" 
+            color="success"
+            (click)="saveNote(i)">
+            <ion-icon name="checkmark-outline"></ion-icon>
+          </ion-button>
+          
+          <ion-button 
+            *ngIf="note.editing" 
+            fill="clear" 
+            size="small" 
+            color="medium"
+            (click)="cancelEdit(i)">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+          
+          <ion-button 
+            fill="clear" 
+            size="small" 
+            color="danger"
+            (click)="deleteNote(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

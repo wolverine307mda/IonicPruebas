@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>🏁 Test de Banderas</ion-title>
+    <ion-buttons slot="end">
+      <ion-chip color="primary">
+        <ion-label>{{ score }}/{{ totalQuestions }}</ion-label>
+      </ion-chip>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Test de Banderas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="game-container">
+    
+    <!-- Estadísticas -->
+    <ion-card class="stats-card">
+      <ion-card-content>
+        <div class="stats-row">
+          <div class="stat-item">
+            <ion-text color="primary">
+              <h2>{{ score }}</h2>
+              <p>Correctas</p>
+            </ion-text>
+          </div>
+          <div class="stat-item">
+            <ion-text color="medium">
+              <h2>{{ totalQuestions }}</h2>
+              <p>Total</p>
+            </ion-text>
+          </div>
+          <div class="stat-item" *ngIf="totalQuestions > 0">
+            <ion-text [color]="getScorePercentage() >= 70 ? 'success' : 'warning'">
+              <h2>{{ getScorePercentage() }}%</h2>
+              <p>Precisión</p>
+            </ion-text>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Contenedor de la bandera -->
+    <ion-card class="flag-card">
+      <ion-card-content>
+        <div class="flag-container">
+          <img 
+            [src]="flagUrl" 
+            [alt]="currentQuestion.correctCountry.name"
+            class="flag-image"
+            loading="lazy">
+        </div>
+        <ion-text color="medium">
+          <p class="flag-question">¿A qué país pertenece esta bandera?</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Opciones -->
+    <div class="options-container">
+      <ion-button 
+        *ngFor="let option of options; let i = index"
+        [color]="isAnswered ? getButtonColor(i) : 'light'"
+        fill="solid"
+        expand="block"
+        class="option-button"
+        [disabled]="buttonsDisabled"
+        (click)="checkAnswer(i)">
+        <ion-icon 
+          *ngIf="isAnswered && i === currentQuestion.correct" 
+          name="checkmark-circle" 
+          slot="start">
+        </ion-icon>
+        <ion-icon 
+          *ngIf="isAnswered && i !== currentQuestion.correct" 
+          name="close-circle" 
+          slot="start">
+        </ion-icon>
+        {{ option.name }}
+      </ion-button>
+    </div>
+
+    <!-- Botón de reinicio -->
+    <div class="reset-container" *ngIf="totalQuestions >= 5">
+      <ion-button 
+        fill="outline" 
+        color="medium"
+        (click)="resetGame()">
+        <ion-icon name="refresh" slot="start"></ion-icon>
+        Reiniciar Juego
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>
