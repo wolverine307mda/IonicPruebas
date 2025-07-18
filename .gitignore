@@ -1,7 +1,6 @@
 # Ionic/Angular/Node common
 node_modules/
 www/
-android/
 ios/
 build/
 dist/
