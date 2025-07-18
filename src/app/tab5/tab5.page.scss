@@ -34,37 +34,37 @@
   margin-bottom: 24px;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--ion-color-light);
 }
 
 .flag-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 16px;
-  padding: 20px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 0;
 }
 
 .flag-image {
-  width: 160px;
+  width: 180px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
 .flag-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .flag-question {
   text-align: center;
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: var(--ion-color-dark);
 }
 
 .options-container {
