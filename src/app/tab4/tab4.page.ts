@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -7,13 +7,15 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./tab4.page.scss'],
   standalone: false,
 })
-export class Tab4Page implements OnInit {
+export class Tab4Page implements OnInit, OnDestroy {
 
   // Propiedades del formulario
   nombre: string = '';
   email: string = '';
   telefono: string = '';
   fechaNacimiento: string = '';
+  horaActual: string = '';
+  private intervalId: any;
 
   constructor(
     private alertController: AlertController,
@@ -23,6 +25,39 @@ export class Tab4Page implements OnInit {
   ngOnInit() {
     // Cargar datos guardados si existen
     this.cargarDatos();
+    // Iniciar el reloj
+    this.iniciarReloj();
+  }
+
+  ngOnDestroy() {
+    // Limpiar el intervalo cuando el componente se destruya
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  /**
+   * Inicia el reloj que se actualiza cada segundo
+   */
+  private iniciarReloj() {
+    // Actualizar inmediatamente
+    this.actualizarHora();
+    
+    // Configurar actualización cada segundo
+    this.intervalId = setInterval(() => {
+      this.actualizarHora();
+    }, 1000);
+  }
+
+  /**
+   * Actualiza la hora actual con formato HH:mm:ss
+   */
+  private actualizarHora() {
+    const ahora = new Date();
+    const horas = ahora.getHours().toString().padStart(2, '0');
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    const segundos = ahora.getSeconds().toString().padStart(2, '0');
+    this.horaActual = `${horas}:${minutos}:${segundos}`;
   }
 
   /**

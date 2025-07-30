@@ -32,6 +32,17 @@
     </ion-item><br><br>
 
     <ion-button expand="full" (click)="guardarPerfil()">Guardar Perfil</ion-button>
-    <ion-button expand="full" color="secondary" (click)="limpiarFormulario()">Limpiar Formulario</ion-button>
+    <ion-button expand="full" color="secondary" (click)="limpiarFormulario()">Limpiar Formulario</ion-button><br><br><br><br>
+
+    <ion-item>
+      <ion-icon name="time-outline" slot="start" color="primary"></ion-icon>
+      <ion-label>
+        <h2>Hora Actual</h2>
+        <p style="font-size: 1.2em; font-weight: bold; color: var(--ion-color-primary);">{{horaActual}}</p>
+      </ion-label>
+    </ion-item>
+
+    <br><br>
+
   </ion-list>
 </ion-content>
